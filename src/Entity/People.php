@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Entity;
 
-class people
+class People
 {
     /* --------------------------------------------------- */
     /*                      Attributes                     */
