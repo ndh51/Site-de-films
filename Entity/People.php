@@ -6,6 +6,10 @@ namespace Entity;
 
 class people
 {
+    /* --------------------------------------------------- */
+    /*                      Attributes                     */
+    /* --------------------------------------------------- */
+
     private int $id;
     private int $avatarId;
     private string $date;
@@ -13,6 +17,12 @@ class people
     private string $name;
     private string $bio;
     private string $plaOfBir;
+
+
+
+    /* --------------------------------------------------- */
+    /*                   Getters/Setters                   */
+    /* --------------------------------------------------- */
 
     /**
      * @return int

@@ -6,12 +6,21 @@ namespace Entity;
 
 class cast
 {
+    /* --------------------------------------------------- */
+    /*                      Attributes                     */
+    /* --------------------------------------------------- */
+
     private int $Id;
     private int $movieId;
     private int $peopleId;
     private string $role;
     private int $orderIndex;
 
+
+
+    /* --------------------------------------------------- */
+    /*                   Getters/Setters                   */
+    /* --------------------------------------------------- */
 
     /**
      * @return int
