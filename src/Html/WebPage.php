@@ -82,8 +82,7 @@ class WebPage
 
     public function toHTML()
     {
-        $res = ' <!DOCTYPE html> <html lang="fr"> <head> <meta name="viewport" charset="utf-8"> ' . $this->getHead();
-        $res .= '<title> ' . $this->gettitle() . '</title> </head> ';
+        $res = ' <!DOCTYPE html> <html lang="fr"> <head> <meta name="viewport" charset="utf-8"><title>' . $this->gettitle() . '</title> ' . $this->getHead();
         $res .= '<body> ' . $this->getbody() . '</body> </html>';
 
         return $res;
