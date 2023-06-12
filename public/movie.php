@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Entity\Collection\MovieCollection;
+use Database\MyPdo;
 use Entity\Movie;
 use Html\WebPage;
 
@@ -23,6 +23,7 @@ $movie = Movie::findById((int)$movieId);
 $moviePage -> setTitle("{$movie->getTitle()}");
 
 $moviePage -> appendContent(<<<HTML
+
     <header class="header">
         <h1>Films - {$movie->getTitle()}</h1>
     </header>
@@ -47,12 +48,44 @@ $moviePage -> appendContent(<<<HTML
                 {$movie->getOverview()}
             </div>
         </div>
-        <div class="list">
-            
-        </div>
+        <ul class="list">
+HTML);
+
+$r = MyPdo::getInstance() -> prepare(<<<SQL
+         SELECT *
+         FROM people p, cast c
+         WHERE p.id = c.peopleId
+            AND movieId = ?
+    SQL);
+
+$r -> bindValue(1, $movieId);
+$r -> execute();
+
+foreach ($r -> fetchAll() as $line) {
+    $moviePage -> appendContent(<<<HTML
+
+            <li class="list__people">
+                <a href="people.php?peopleId={$line['peopleId']}">
+                <div class="list__people__image">
+                    "Vignette"
+                </div>
+                <div class="list__people_role">
+                    {$line['role']}
+                </div>
+                <div class="list__people_name">
+                    {$line['name']}
+                </div>
+                </a>
+            </li>
+HTML);
+}
+
+$moviePage -> appendContent(<<<HTML
+    
+        </ul>
     </main>
     <footer class="footer">
-        <h2>Dernière modification : {$moviePage->getLastModification()}</h2>
+        <h2>Dernière modification : </h2>
     </footer>
 HTML);
 
