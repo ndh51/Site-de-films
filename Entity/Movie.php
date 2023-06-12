@@ -6,7 +6,6 @@ namespace Entity;
 
 class Movie
 {
-
     /* --------------------------------------------------- */
     /*                      Attributes                     */
     /* --------------------------------------------------- */
@@ -16,6 +15,10 @@ class Movie
     private string $originalLanguage;
     private string $originalTitle;
     private string $overview;
+    private string $releaseDate;
+    private int $runtime;
+    private string $tagline;
+    private string $title;
 
 
 
@@ -166,9 +169,5 @@ class Movie
     {
         $this->title = $title;
     }
-    private string $releaseDate;
-    private int $runtime;
-    private string $tagline;
-    private string $title;
 
 }
