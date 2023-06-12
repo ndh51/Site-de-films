@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Entity;
 
-class people
+use Database\MyPdo;
+
+class People
 {
     /* --------------------------------------------------- */
     /*                      Attributes                     */
@@ -134,5 +136,24 @@ class people
     public function setPlaOfBir(string $plaOfBir): void
     {
         $this->plaOfBir = $plaOfBir;
+    }
+
+    /** Renvoie une personne à partir de son Id
+     *
+     * @param int $id
+     * @return People
+     */
+    public static function findById(int $id): People
+    {
+        $r = MyPdo::getInstance() -> prepare(
+            <<<SQL
+            SELECT *
+            FROM people
+            WHERE id = ?;
+        SQL
+        );
+        $r -> bindValue(1, $id);
+        $r -> execute();
+        return $r -> fetchObject("Entity\\People");
     }
 }

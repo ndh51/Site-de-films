@@ -39,12 +39,9 @@
         "start:linux": [
             "bin/run-server.sh",
             "Composer\\Config::disableProcessTimeout"
-
         ],
         "test:cs": "php vendor/bin/php-cs-fixer fix --dry-run",
         "fix:cs": "php vendor/bin/php-cs-fixer fix",
         "start": " composer start:windows"
-
-
     }
 }
