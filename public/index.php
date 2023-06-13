@@ -28,7 +28,7 @@ foreach ($ans as $line) {
         <a href="Movie.php?movieId={$line->getId()}">
         <div class="movie_cover">
             <a href="Movie.php?movieId={$line->getId()}"> 
-                <img src='image.php?imageId={$line->getPosterId()}'>
+                <img src='image.php?imageId={$line->getPosterId()}' alt="{$line->getTitle()}">
             </a>
         </div>
         <div class="movie_title">
