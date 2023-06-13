@@ -2,4 +2,4 @@
 /vendor/
 .php-cs-fixer.cache
 /.mypdo.ini
-/tests.php
+/public/tests.php
