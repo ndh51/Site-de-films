@@ -81,7 +81,7 @@ foreach ($q->fetchAll(MyPdo::FETCH_ASSOC) AS $line){
            </div>
         
         </div>
-
+        </a>
 HTML);
 
 }
