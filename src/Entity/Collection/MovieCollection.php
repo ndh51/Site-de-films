@@ -6,7 +6,6 @@ namespace Entity\Collection;
 
 use Database\MyPdo;
 use Entity\Movie;
-use PDO;
 
 class MovieCollection
 {

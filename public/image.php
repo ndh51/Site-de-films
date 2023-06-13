@@ -2,10 +2,9 @@
 declare(strict_types=1);
 
 use Entity\Image;
-use Database\MyPdo;
 
 if (!isset($_GET['imageId']) || !ctype_digit($_GET['imageId'])) {
-    http_response_code(400);
+    echo "Database/Image/movie.png";
     exit;
 }
 

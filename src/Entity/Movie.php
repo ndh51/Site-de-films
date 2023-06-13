@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Entity;
 
+use Database\MyPdo;
+
 class Movie
 {
     /* --------------------------------------------------- */
@@ -170,4 +172,22 @@ class Movie
         $this->title = $title;
     }
 
+    /** Renvoie un Film à partir de son Id
+     *
+     * @param int $id
+     * @return Movie
+     */
+    public static function findById(int $id): Movie
+    {
+        $r = MyPdo::getInstance() -> prepare(
+            <<<SQL
+            SELECT *
+            FROM movie
+            WHERE id = ?;
+        SQL
+        );
+        $r -> bindValue(1, $id);
+        $r -> execute();
+        return $r -> fetchObject("Entity\\Movie");
+    }
 }

@@ -3,3 +3,4 @@
 .php-cs-fixer.cache
 /.mypdo.ini
 /public/tests.php
+/public/test.php
