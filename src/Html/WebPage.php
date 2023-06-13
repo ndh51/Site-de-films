@@ -1,49 +1,34 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Html;
 
 class WebPage
 {
-    private string $head;
-    private string $title;
-    private string $body;
+    /* Attributs */
 
-    public function __Construct(string $title = '')
-    {
-        $this->title = $title;
-        $this->head = '';
-        $this->body = '';
-    }
+    private string $head = "";
+    private string $title = "";
+    private string $body = "";
 
-    /**
-     * @param string $head
-     */
-    public function setHead($head)
-    {
-        $this->head = $head;
-    }
+
+    /* Constructeur */
 
     /**
      * @param string $title
      */
-    public function setTitle($title)
+    public function __construct(string $title = "")
     {
         $this->title = $title;
     }
 
-    /**
-     * @param string $body
-     */
-    public function setBody($body)
-    {
-        $this->body = $body;
-    }
-
+    /* Accesseurs */
 
     /**
      * @return string
      */
-    public function getHead()
+    public function getHead(): string
     {
         return $this->head;
     }
@@ -51,7 +36,7 @@ class WebPage
     /**
      * @return string
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
@@ -59,52 +44,156 @@ class WebPage
     /**
      * @return string
      */
-    public function getBody()
+    public function getBody(): string
     {
         return $this->body;
     }
 
-    public function appendContent(string $content)
+
+
+    /* Setters */
+
+    /**
+     * @param string $title
+     * @return void
+     */
+    public function setTitle(string $title): void
     {
-        $this->body .= $content;
+        $this->title = $title;
     }
 
-    public function escapeString(string $str)
+
+
+    /* Autres */
+
+    /**
+     * @param string $content
+     * @return void
+     */
+    public function appendToHead(string $content): void
     {
-        $strg = htmlspecialchars($str, ENT_QUOTES | ENT_XHTML);
-        return $strg;
+        $this->head .= <<<HTML
+            {$content}
+            HTML;
     }
 
-    public function appendToHead(string $content)
+    /**
+     * @param string $css
+     * @return void
+     */
+    public function appendCss(string $css): void
     {
-        $this->head .= $content;
+        if ((!str_contains($this->getHead(), '<style>') && str_contains($this->getHead(), '</style>')) || (str_contains($this->getHead(), '<style>') && !str_contains($this->getHead(), '</style>'))) {
+            throw new Exception("Un problème a été repéré dans l'insertion des balises CSS");
+        } elseif (!str_contains($this->getHead(), '<style>') && !str_contains($this->getHead(), '</style>')) {
+            $this->head = $this->getHead() . <<<HTML
+            
+                    <style>
+                    {$css}
+                    </style>
+            HTML;
+        } elseif (str_contains($this->getHead(), '<style>') && str_contains($this->getHead(), '</style>')) {
+            $this->head = $this->getHead() . <<<CSS
+            
+                    {$css}
+            CSS;
+        }
     }
 
-    public function toHTML()
+    /**
+     * @param string $url
+     * @return void
+     */
+    public function appendCssUrl(string $url): void
     {
-        $res = ' <!DOCTYPE html> <html lang="fr"> <head> <meta name="viewport" charset="utf-8"><title>' . $this->gettitle() . '</title> ' . $this->getHead();
-        $res .= '<body> ' . $this->getbody() . '</body> </html>';
-
-        return $res;
+        $this->head = $this->getHead() . <<<HTML
+                <link rel="stylesheet" href="{$url}">
+            HTML;
     }
 
-    public function appendCss(string $css)
+    /**
+     * @param string $js
+     * @return void
+     */
+    public function appendJs(string $js): void
     {
-        $this->appendToHead('<style>' . $css . '</style>');
+        $this->head = $this->getHead() . <<<HTML
+                    
+                    <script>
+                    {$js}
+                    </script>
+            HTML;
     }
 
-    public function appendCssUrl(string $url)
+    /**
+     * @param string $url
+     * @return void
+     */
+    public function appendJsUrl(string $url): void
     {
-        $this->appendToHead('<link href="' . $url . '" rel="stylesheet">');
+        $this->head = $this->getHead() . <<<HTML
+                    
+                    <script src="{$url}"></script>
+            HTML;
     }
 
-    public function appendJs(string $js)
+    /**
+     * @param string $content
+     * @return void
+     */
+    public function appendContent(string $content): void
     {
-        $this->appendToHead('<script type="text/javascript">' . $js . '</script>');
+        $this->body = $this->getBody() . <<<HTML
+            {$content}
+            HTML;
+
     }
 
-    public function appendJsUrl(string $js)
+    /**
+     * @return string
+     */
+    public function toHTML(): string
     {
-        $this->appendToHead('<script type="text/javascript" src="' . $js . '"></script>');
+
+
+        $title = $this->getTitle();
+        $head = $this->getHead();
+        $body = $this->getBody();
+
+        $html = <<<HTML
+            <!doctype html>
+            <html lang="fr">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>{$title}</title>
+                {$head}
+                </head>
+                <body>
+                {$body}
+                </body>
+            </html>
+            HTML;
+
+        return $html;
     }
+
+    /**
+     * @param string $string
+     * @return string
+     */
+    public function escapeString(string $string): string
+    {
+        $string = htmlspecialchars($string, ENT_QUOTES | ENT_HTML5);
+        return $string;
+    }
+
+    /**
+     * @return string
+     */
+    public static function getLastModification(): string
+    {
+        return "Dernière modification : " . date("F d Y H:i:s.", getlastmod());
+    }
+
 }
