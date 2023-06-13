@@ -41,13 +41,8 @@ foreach ($ans as $line) {
     );
 }
 
-
 $wp->appendContent('</div> ');
 
-
-
-
-$wp->appendContent("<footer> <h1> {$wp->getLastModification()} </h1> </footer> ");
-
+$wp->appendContent("<footer> <h2> {$wp->getLastModification()} </h2> </footer> ");
 
 echo $wp->toHTML();
