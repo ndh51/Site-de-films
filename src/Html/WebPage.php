@@ -193,7 +193,7 @@ class WebPage
      */
     public static function getLastModification(): string
     {
-        return "Dernière modification : " . date("F d Y H:i:s.", getlastmod());
+        return "Dernière modification : " . date("d/m/Y - H:i:s", getlastmod());
     }
 
 }
