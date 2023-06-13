@@ -47,7 +47,7 @@ $wp->appendContent('</div> ');
 
 
 
-$wp->appendContent('<footer> <h1> {$ans->getLastModification()} </h1> </footer> ');
+$wp->appendContent("<footer> <h1> {$wp->getLastModification()} </h1> </footer> ");
 
 
 echo $wp->toHTML();
