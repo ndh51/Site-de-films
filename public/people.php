@@ -26,10 +26,13 @@ $wp->appendCssUrl('/people.css');
 
 
 $wp->appendContent(<<<HTML
+    <header>
+        <h1>Films - {$people->getName()}</h1>
+    </header>
     <main>
         <div class="people">
             <div class="people__image">
-                <img src="image.php?imageId={$people->getAvatarId()}" alt="Image de l'acteur(ice) : {$people->getName()}">
+                <img src='vignette.php?vignetteId={$people->getAvatarId()}' alt='Image du film {$people->getName()}'>
             </div>
             <div class="people__info">
                     <div class="people__name">
@@ -42,6 +45,7 @@ $wp->appendContent(<<<HTML
                         <div class="people__date_Birth">
                             Date de naissance : {$people->getBirthday()}
                         </div>
+                        <div class="idk"> - </div>
                         <div class="people__date_Death">
                             Date de Décès : {$people->getDeathday()}
                         </div>
@@ -53,11 +57,12 @@ $wp->appendContent(<<<HTML
         </div>
 HTML);
 
-$q=MyPdo::getInstance()->query("SELECT m.posterid,m.title,m.releaseDate, c.role FROM cast c join movie m on c.movieId = m.id WHERE peopleId=$peopleId");
+$q=MyPdo::getInstance()->query("SELECT m.posterid,m.title,m.releaseDate, c.role,c.movieId FROM cast c join movie m on c.movieId = m.id WHERE peopleId=$peopleId");
 
 foreach ($q->fetchAll(MyPdo::FETCH_ASSOC) AS $line){
     $wp->appendContent(<<<HTML
-        <div class="movie">
+        <a href="movie.php?movieId={$line['movieId']}"
+        <div class="movie" >
            <div class="movie__poster">
                 <img src="poster.php?posterId={$line['posterid']}" alt="POster de {$line['title']}"> 
            </div>
