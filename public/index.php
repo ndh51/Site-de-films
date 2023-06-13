@@ -25,14 +25,14 @@ foreach ($ans as $line) {
     $wp->appendContent(
         <<<HTML
     <div class="movie">
-        <a href="Movie.php?movieId={$line->getId()}">
+        <a href="movie.php?movieId={$line->getId()}">
         <div class="movie_cover">
-            <a href="Movie.php?movieId={$line->getId()}"> 
+            <a href="movie.php?movieId={$line->getId()}"> 
                 <img src='image.php?imageId={$line->getPosterId()}' alt="{$line->getTitle()}">
             </a>
         </div>
         <div class="movie_title">
-            <a href="Movie.php?movieId={$line->getId()}">
+            <a href="movie.php?movieId={$line->getId()}">
                 <p> {$line->getTitle()} </p>
             </a>
         </div>
@@ -43,8 +43,6 @@ foreach ($ans as $line) {
 
 
 $wp->appendContent('</div> ');
-
-
 
 
 $wp->appendContent('<footer> <h1> {$ans->getLastModification()} </h1> </footer> ');

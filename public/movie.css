@@ -1,0 +1,127 @@
+html{
+    height: 100%;
+}
+
+body{
+    display: flex;
+    max-height: 100%;
+    flex-direction: column;
+    margin: 0 5% 0 5%;
+}
+
+header{
+    text-align: center;
+    border: solid;
+    flex-grow: 1;
+
+}
+
+main{
+    border: solid;
+    display: flex;
+    flex-direction: Column;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    flex-grow: 4;
+
+}
+
+.movie{
+    border: solid;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-grow: 1;
+    margin: 40px 5% 0 5%;
+
+}
+
+.movie__poster{
+
+}
+
+.movie__description{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.movie__description_first_line{
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+
+  }
+
+.movie__title{
+    flex-grow: 3;
+    text-align: start;
+    border: solid;
+}
+
+.movie__releaseDate{
+    flex: 1;
+    text-align: end;
+    border: solid;
+}
+
+.movie__originalTitle{
+    flex-grow: 1;
+    text-align: end;
+    border: solid;
+}
+
+
+.movie__tagline{
+    flex-grow: 1;
+    border: solid;
+}
+
+.movie__overview{
+    flex-grow: 2;
+    border: solid;
+}
+
+
+
+.list{
+    display: flex;
+    flex-direction: column;
+    margin: 40px 5% 0 5%;
+}
+
+.list__people__image {
+    border: solid;
+
+}
+.list__people{
+    border: solid;
+    border-bottom-color: black;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+
+}
+
+.list__role_info{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 4;
+}
+
+.list__people_role{
+    flex-grow: 1;
+    border: solid;
+}
+
+.list__people_name{
+    flex-grow: 1;
+    border: solid;
+}
+
+footer{
+    text-align: center;
+    flex-grow: 1;
+    border: solid;
+}
