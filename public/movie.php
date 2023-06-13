@@ -30,25 +30,25 @@ $moviePage -> appendContent(<<<HTML
     <main>
         <div class="movie">
             <div class="movie__poster">
-                "poster"
+                <img src='image.php?imageId={$movie->getPosterId()}' alt="Poster du film : {$movie->getTitle()}">
             </div>
             <div class="movie__title">
-                {$movie->getTitle()}
+                Titre : {$movie->getTitle()}
             </div>
             <div class="movie__releaseDate">
-                {$movie->getReleaseDate()}
+                Date : {$movie->getReleaseDate()}
             </div>
             <div class="movie__originalTitle">
-                {$movie->getOriginalTitle()}
+                Titre original : {$movie->getOriginalTitle()}
             </div>
             <div class="movie__tagline">
-                {$movie->getTagline()}
+                Slogan : {$movie->getTagline()}
             </div>
             <div class="movie__overview">
-                {$movie->getOverview()}
+                Résumé : {$movie->getOverview()}
             </div>
         </div>
-        <ul class="list">
+        <div class="list">
 HTML);
 
 $r = MyPdo::getInstance() -> prepare(<<<SQL
@@ -64,25 +64,25 @@ $r -> execute();
 foreach ($r -> fetchAll() as $line) {
     $moviePage -> appendContent(<<<HTML
 
-            <li class="list__people">
+            <div class="list__people">
                 <a href="people.php?peopleId={$line['peopleId']}">
                 <div class="list__people__image">
-                    "Vignette"
+                    <img src="image.php?imageId={$line['avatarId']}" alt="Image de l'acteur(ice) : {$line['name']}">
                 </div>
                 <div class="list__people_role">
-                    {$line['role']}
+                    Rôle : {$line['role']}
                 </div>
                 <div class="list__people_name">
-                    {$line['name']}
+                    Nom : {$line['name']}
                 </div>
                 </a>
-            </li>
+            </div>
 HTML);
 }
 
 $moviePage -> appendContent(<<<HTML
     
-        </ul>
+        </div>
     </main>
     <footer class="footer">
         <h2>{$moviePage->getLastModification()}</h2>
