@@ -29,7 +29,7 @@ $moviePage -> appendContent(<<<HTML
         <main>
             <div class="movie">
                 <div class="movie__poster">
-                    <img src='image.php?imageId={$movie->getPosterId()}' alt="Poster du film : {$movie->getTitle()}">
+                    <img src='poster.php?posterId={$movie->getPosterId()}' alt="Poster du film : {$movie->getTitle()}">
                 </div>
                 <div class="movie__title">
                     Titre : {$movie->getTitle()}
@@ -66,7 +66,7 @@ foreach ($r -> fetchAll() as $line) {
                 <div class="list__people">
                     <a href="people.php?peopleId={$line['peopleId']}">
                     <div class="list__people__image">
-                        <img src="image.php?imageId={$line['avatarId']}" alt="Image de l'acteur(ice) : {$line['name']}">
+                        <img src="vignette.php?vignetteId={$line['avatarId']}" alt="Image de l'acteur(ice) : {$line['name']}">
                     </div>
                     <div class="list__people_role">
                         Rôle : {$line['role']}
