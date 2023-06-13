@@ -3,20 +3,31 @@
 declare(strict_types=1);
 
 use Database\MyPdo;
+use Entity\Exception\EntityNotFoundException;
+use Entity\Exception\ParameterException;
 use Entity\Movie;
 use Html\WebPage;
 
 $moviePage = new WebPage();
 
-if (! isset($_GET['movieId'])) {
+try {
+    if (!isset($_GET['movieId']) || !ctype_digit($_GET['movieId']) || $_GET['movieId'] < 0) {
+        throw new ParameterException();
+    }
+    $movieId = preg_replace('@<(.+)[^>]*>.*?@is', '', $_GET['movieId']);
+    if (! Movie::findById((int) $movieId)) {
+        throw new EntityNotFoundException();
+    }
+} catch (ParameterException) {
+    http_response_code(400);
+    exit;
+} catch (EntityNotFoundException) {
     http_response_code(404);
     exit;
-} elseif (! ctype_digit($_GET['movieId'])) {
-    header('Location: /');
+} catch (Exception) {
+    http_response_code(500);
     exit;
 }
-
-$movieId = preg_replace('@<(.+)[^>]*>.*?@is', '', $_GET['movieId']);
 
 $movie = Movie::findById((int)$movieId);
 
