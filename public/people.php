@@ -40,28 +40,53 @@ $wp->appendContent(<<<HTML
                     </div>
                     <div class="people__dates">
                         <div class="people__date_Birth">
-                            Date de naissance : {$people->getDate()}
+                            Date de naissance : {$people->getBirthday()}
                         </div>
                         <div class="people__date_Death">
                             Date de Décès : {$people->getDeathday()}
                         </div>
                     </div>
                     <div class="people__bio">
-                        Biographie : {$people->getBio()}
+                        Biographie : {$people->getBiography()}
                     </div>
             </div>
         </div>
 HTML);
 
+$q=MyPdo::getInstance()->query("SELECT m.posterid,m.title,m.releaseDate, c.role FROM cast c join movie m on c.movieId = m.id WHERE peopleId=$peopleId");
 
+foreach ($q->fetchAll(MyPdo::FETCH_ASSOC) AS $line){
+    $wp->appendContent(<<<HTML
+        <div class="movie">
+           <div class="movie__poster">
+                <img src="poster.php?posterId={$line['posterid']}" alt="POster de {$line['title']}"> 
+           </div>
+           <div class="movie__description">
+                <div class="movie__description_first_line">
+                    <div class="movie__title">
+                        Titre : {$line['title']}
+                    </div>
+                    <div class="movie__releaseDate">
+                        Date : {$line['releaseDate']}
+                    </div>      
+                </div>
+                <div class="movie__description_second_line">
+                    Role : {$line['role']}
+                </div>
+           </div>
+        
+        </div>
+
+HTML);
+
+}
 
 $wp -> appendContent(<<<HTML
     
     </main>
     <footer class="footer">
-        <h2>{wp->getLastModification()}</h2>
+        <h2>{$wp->getLastModification()}</h2>
     </footer>
 HTML);
 
-##echo $wp -> toHTML();
-echo $people->getDeathday();
+echo $wp -> toHTML();
