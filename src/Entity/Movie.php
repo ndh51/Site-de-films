@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Entity;
 
 use Database\MyPdo;
+use Entity\Exception\EntityNotFoundException;
 
 class Movie
 {
@@ -188,6 +189,10 @@ class Movie
         );
         $r -> bindValue(1, $id);
         $r -> execute();
-        return $r -> fetchObject("Entity\\Movie");
+        if ($movie = $r -> fetchObject("Entity\\Movie")) {
+            return $movie;
+        } else {
+            throw new EntityNotFoundException();
+        }
     }
 }

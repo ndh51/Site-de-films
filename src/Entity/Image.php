@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Entity;
 
 use Database\MyPdo;
+use Entity\Exception\EntityNotFoundException;
 
 class Image
 {
@@ -56,8 +57,11 @@ class Image
         );
         $r -> bindValue(1, $id);
         $r -> execute();
-        return $r -> fetchObject("Entity\\Image");
-
+        if ($image = $r -> fetchObject("Entity\\Image")) {
+            return $image;
+        } else {
+            throw new EntityNotFoundException();
+        }
     }
 
 }
