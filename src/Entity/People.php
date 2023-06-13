@@ -16,17 +16,18 @@ class People
 
     private int $id;
     private int $avatarId;
-    private string $date;
-    private string $deathday;
+    private ?string $birthday = null;
+    private ?string $deathday = null;
     private string $name;
-    private string $bio;
-    private string $placeOfBirth;
-
+    private ?string $biography  = null;
+    private ?string $placeOfBirth  =null;
 
 
     /* --------------------------------------------------- */
     /*                   Getters/Setters                   */
     /* --------------------------------------------------- */
+
+
 
     /**
      * @return int
@@ -61,37 +62,33 @@ class People
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getDate(): string
+    public function getBirthday(): ?string
     {
-        return $this->date;
+        return $this->birthday;
     }
 
     /**
-     * @param string $date
+     * @param string|null $birthday
      */
-    public function setDate(string $date): void
+    public function setBirthday(?string $birthday): void
     {
-        $this->date = $date;
+        $this->birthday = $birthday;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getDeathday(): string
+    public function getDeathday(): ?string
     {
-        $ans=$this->deathday;
-        if ($this->deathday==NULL) {
-            $ans = '';
-        }
-        return $ans;
+        return $this->deathday;
     }
 
     /**
-     * @param string $deathday
+     * @param string|null $deathday
      */
-    public function setDeathday(string $deathday): void
+    public function setDeathday(?string $deathday): void
     {
         $this->deathday = $deathday;
     }
@@ -113,33 +110,33 @@ class People
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBio(): string
+    public function getBiography(): ?string
     {
-        return $this->bio;
+        return $this->biography;
     }
 
     /**
-     * @param string $bio
+     * @param string|null $biography
      */
-    public function setBio(string $bio): void
+    public function setBiography(?string $biography): void
     {
-        $this->bio = $bio;
+        $this->biography = $biography;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getplaceOfBirth(): string
+    public function getPlaceOfBirth(): ?string
     {
         return $this->placeOfBirth;
     }
 
     /**
-     * @param string $plaOfBir
+     * @param string|null $placeOfBirth
      */
-    public function setPlaOfBir(string $placeOfBirth): void
+    public function setPlaceOfBirth(?string $placeOfBirth): void
     {
         $this->placeOfBirth = $placeOfBirth;
     }
@@ -153,14 +150,14 @@ class People
     {
         $r = MyPdo::getInstance() -> prepare(
             <<<SQL
-            SELECT id, avatarId, birthday, COALESCE(deathday,''), name, biography, COALESCE(placeOfBirth,'')
+            SELECT id, avatarId, birthday, deathday, name, biography, placeOfBirth
             FROM people
             WHERE id = ?;
         SQL
         );
         $r -> bindValue(1, $id);
         $r -> execute();
-        if ($people = $r -> fetchObject("Entity\\Movie")) {
+        if ($people = $r -> fetchObject("Entity\\People")) {
             return $people;
         } else {
             throw new EntityNotFoundException();
