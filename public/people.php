@@ -64,7 +64,7 @@ foreach ($q->fetchAll(MyPdo::FETCH_ASSOC) AS $line){
         <a href="movie.php?movieId={$line['movieId']}"
         <div class="movie" >
            <div class="movie__poster">
-                <img src="poster.php?posterId={$line['posterid']}" alt="POster de {$line['title']}"> 
+                <img src="poster.php?posterId={$line['posterId']}" alt="POster de {$line['title']}"> 
            </div>
            <div class="movie__description">
                 <div class="movie__description_first_line">
