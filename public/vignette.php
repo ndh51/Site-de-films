@@ -7,7 +7,7 @@ use Entity\Exception\ParameterException;
 use Entity\Image;
 
 try {
-    if (!ctype_digit($_GET['vignetteId']) || $_GET['vignetteId'] < 0 || !isset($_GET['vignetteId'])) {
+    if (!isset($_GET['vignetteId']) || !ctype_digit($_GET['vignetteId']) || $_GET['vignetteId'] < 0) {
         throw new ParameterException();
     }
     $vignetteId = preg_replace('@<(.+)[^>]*>.*?@is', '', $_GET['vignetteId']);
