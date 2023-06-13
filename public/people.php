@@ -6,7 +6,6 @@ use Database\MyPdo;
 use Entity\People;
 use Html\WebPage;
 
-
 if (! isset($_GET['peopleId'])) {
     http_response_code(404);
     exit;
@@ -59,12 +58,12 @@ HTML);
 
 $q=MyPdo::getInstance()->query("SELECT m.posterid,m.title,m.releaseDate, c.role,c.movieId FROM cast c join movie m on c.movieId = m.id WHERE peopleId=$peopleId");
 
-foreach ($q->fetchAll(MyPdo::FETCH_ASSOC) AS $line){
+foreach ($q->fetchAll(MyPdo::FETCH_ASSOC) as $line) {
     $wp->appendContent(<<<HTML
         <a href="movie.php?movieId={$line['movieId']}"
         <div class="movie" >
            <div class="movie__poster">
-                <img src="poster.php?posterId={$line['posterid']}" alt="POster de {$line['title']}"> 
+                <img src="poster.php?posterId={$line['posterId']}" alt="POster de {$line['title']}"> 
            </div>
            <div class="movie__description">
                 <div class="movie__description_first_line">
@@ -81,7 +80,7 @@ foreach ($q->fetchAll(MyPdo::FETCH_ASSOC) AS $line){
            </div>
         
         </div>
-
+        </a>
 HTML);
 
 }
