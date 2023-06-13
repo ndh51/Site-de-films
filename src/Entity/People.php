@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Entity;
 
 use Database\MyPdo;
+use Entity\Exception\EntityNotFoundException;
+
 
 class People
 {
@@ -18,7 +20,7 @@ class People
     private string $deathday;
     private string $name;
     private string $bio;
-    private string $plaOfBir;
+    private string $placeOfBirth;
 
 
 
@@ -79,7 +81,11 @@ class People
      */
     public function getDeathday(): string
     {
-        return $this->deathday;
+        $ans=$this->deathday;
+        if ($this->deathday==NULL) {
+            $ans = '';
+        }
+        return $ans;
     }
 
     /**
@@ -125,17 +131,17 @@ class People
     /**
      * @return string
      */
-    public function getPlaOfBir(): string
+    public function getplaceOfBirth(): string
     {
-        return $this->plaOfBir;
+        return $this->placeOfBirth;
     }
 
     /**
      * @param string $plaOfBir
      */
-    public function setPlaOfBir(string $plaOfBir): void
+    public function setPlaOfBir(string $placeOfBirth): void
     {
-        $this->plaOfBir = $plaOfBir;
+        $this->placeOfBirth = $placeOfBirth;
     }
 
     /** Renvoie une personne à partir de son Id
@@ -147,13 +153,17 @@ class People
     {
         $r = MyPdo::getInstance() -> prepare(
             <<<SQL
-            SELECT *
+            SELECT id, avatarId, birthday, COALESCE(deathday,''), name, biography, COALESCE(placeOfBirth,'')
             FROM people
             WHERE id = ?;
         SQL
         );
         $r -> bindValue(1, $id);
         $r -> execute();
-        return $r -> fetchObject("Entity\\People");
+        if ($people = $r -> fetchObject("Entity\\Movie")) {
+            return $people;
+        } else {
+            throw new EntityNotFoundException();
+        }
     }
 }
