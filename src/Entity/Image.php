@@ -4,13 +4,17 @@ declare(strict_types=1);
 
 namespace Entity;
 
-class image
+use Database\MyPdo;
+
+class Image
 {
     /* --------------------------------------------------- */
     /*                      Attributes                     */
     /* --------------------------------------------------- */
 
     private int $id;
+    private string $jpeg;
+
 
 
 
@@ -27,11 +31,32 @@ class image
     }
 
     /**
-     * @param int $id
+     * @return string
      */
-    public function setId(int $id): void
+    public function getJpeg(): string
     {
-        $this->id = $id;
+        return $this->jpeg;
+    }
+
+    /**
+     *
+     * @param int $id
+     * @return Image
+     */
+
+    public static function findById(int $id): Image
+    {
+        $r = MyPdo::getInstance() -> prepare(
+            <<<SQL
+            SELECT *
+            FROM image
+            WHERE id = ?;
+        SQL
+        );
+        $r -> bindValue(1, $id);
+        $r -> execute();
+        return $r -> fetchObject("Entity\\Image");
+
     }
 
 }
