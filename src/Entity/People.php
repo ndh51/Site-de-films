@@ -4,20 +4,6 @@ declare(strict_types=1);
 
 namespace Entity;
 
-class people
-
-
-
-
-
-
-
-<?php
-
-declare(strict_types=1);
-
-namespace Entity;
-
 use Database\MyPdo;
 
 class People

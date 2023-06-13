@@ -33,65 +33,6 @@
 
     "scripts":{
         "start:windows":[
-            "bin/run-server.bat",
-            "Composer\\Config::disableProcessTimeout"
-        ],
-        "start:linux": [
-            "bin/run-server.sh",
-            "Composer\\Config::disableProcessTimeout"
-
-        ],
-        "test:cs": "php vendor/bin/php-cs-fixer fix --dry-run",
-        "fix:cs": "php vendor/bin/php-cs-fixer fix",
-        "start": " composer start:windows"
-
-
-    }
-}
-
-
-
-
-
-
-
-
-
-{
-    "name": "nadhir/sae4",
-    "description": "SAÉ 2.01 - Développement d'une application de consultation et de modification de films",
-    "type": "project",
-    "require": {
-        "ext-pdo": "*"
-    },
-
-    "require-dev": {
-        "friendsofphp/php-cs-fixer": "^3.17",
-        "codeception/codeception": "^4.1",
-        "codeception/module-phpbrowser": "^1",
-        "codeception/module-asserts": "^1",
-        "codeception/module-db": "^1"
-    },
-    "license": "Copyleft",
-    "autoload": {
-        "psr-4": {
-            "": "src/"
-        }
-    },
-
-    "authors": [
-        {
-            "name": "nadhir hales",
-            "email": "nadhir.hales@etudiant.univ-reims.fr"
-        },
-        {
-            "name": "steven morlet",
-            "email": "steven.morlet@etudiant.univ-reims.fr"
-        }
-    ],
-
-    "scripts":{
-        "start:windows":[
             "Composer\\Config::disableProcessTimeout",
             "bin/run-server.bat"
         ],
