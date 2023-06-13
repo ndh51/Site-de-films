@@ -45,8 +45,6 @@ foreach ($ans as $line) {
 $wp->appendContent('</div> ');
 
 
-
-
 $wp->appendContent('<footer> <h1> {$ans->getLastModification()} </h1> </footer> ');
 
 
