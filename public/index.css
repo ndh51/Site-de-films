@@ -1,0 +1,47 @@
+html{
+    height: 100%;
+}
+
+body{
+    display: flex;
+    max-height: 100%;
+    flex-direction: column;
+    margin: 0 5% 0 5%;
+}
+
+header{
+    text-align: center;
+    border: solid;
+    flex-grow: 1;
+
+}
+
+.list{
+    border: solid;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: center;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    flex-grow: 4;
+}
+
+.movie{
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    border: solid;
+    max-width: 15rem;
+}
+
+.movie_title{
+    border: solid;
+    text-align: center;
+}
+
+footer{
+    text-align: center;
+    flex-grow: 1;
+    border: solid;
+}
