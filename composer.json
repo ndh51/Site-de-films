@@ -42,6 +42,6 @@
         ],
         "test:cs": "php vendor/bin/php-cs-fixer fix --dry-run",
         "fix:cs": "php vendor/bin/php-cs-fixer fix",
-        "start": " composer start:windows"
+        "start": "@tart:windows"
     }
 }
