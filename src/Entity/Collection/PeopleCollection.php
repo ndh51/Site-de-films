@@ -6,6 +6,7 @@ namespace Entity\Collection;
 
 use Database\MyPdo;
 use Entity\People;
+use PDO;
 
 class PeopleCollection
 {
@@ -24,6 +25,7 @@ class PeopleCollection
         SQL
         );
         $r -> execute();
+        return $r -> fetchAll(PDO::FETCH_CLASS, People::class);
         return $r -> fetchAll(MyPdo::FETCH_CLASS, People::class);
     }
 }
