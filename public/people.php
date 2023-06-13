@@ -6,7 +6,6 @@ use Database\MyPdo;
 use Entity\People;
 use Html\WebPage;
 
-
 if (! isset($_GET['peopleId'])) {
     http_response_code(404);
     exit;
@@ -59,7 +58,7 @@ HTML);
 
 $q=MyPdo::getInstance()->query("SELECT m.posterid,m.title,m.releaseDate, c.role,c.movieId FROM cast c join movie m on c.movieId = m.id WHERE peopleId=$peopleId");
 
-foreach ($q->fetchAll(MyPdo::FETCH_ASSOC) AS $line){
+foreach ($q->fetchAll(MyPdo::FETCH_ASSOC) as $line) {
     $wp->appendContent(<<<HTML
         <a href="movie.php?movieId={$line['movieId']}"
         <div class="movie" >
