@@ -23,32 +23,31 @@ $movie = Movie::findById((int)$movieId);
 $moviePage -> setTitle("{$movie->getTitle()}");
 
 $moviePage -> appendContent(<<<HTML
-
     <header class="header">
-        <h1>Films - {$movie->getTitle()}</h1>
-    </header>
-    <main>
-        <div class="movie">
-            <div class="movie__poster">
-                <img src='image.php?imageId={$movie->getPosterId()}' alt="Poster du film : {$movie->getTitle()}">
+            <h1>Films - {$movie->getTitle()}</h1>
+        </header>
+        <main>
+            <div class="movie">
+                <div class="movie__poster">
+                    <img src='image.php?imageId={$movie->getPosterId()}' alt="Poster du film : {$movie->getTitle()}">
+                </div>
+                <div class="movie__title">
+                    Titre : {$movie->getTitle()}
+                </div>
+                <div class="movie__releaseDate">
+                    Date : {$movie->getReleaseDate()}
+                </div>
+                <div class="movie__originalTitle">
+                    Titre original : {$movie->getOriginalTitle()}
+                </div>
+                <div class="movie__tagline">
+                    Slogan : {$movie->getTagline()}
+                </div>
+                <div class="movie__overview">
+                    Résumé : {$movie->getOverview()}
+                </div>
             </div>
-            <div class="movie__title">
-                Titre : {$movie->getTitle()}
-            </div>
-            <div class="movie__releaseDate">
-                Date : {$movie->getReleaseDate()}
-            </div>
-            <div class="movie__originalTitle">
-                Titre original : {$movie->getOriginalTitle()}
-            </div>
-            <div class="movie__tagline">
-                Slogan : {$movie->getTagline()}
-            </div>
-            <div class="movie__overview">
-                Résumé : {$movie->getOverview()}
-            </div>
-        </div>
-        <div class="list">
+            <div class="list">
 HTML);
 
 $r = MyPdo::getInstance() -> prepare(<<<SQL
@@ -63,20 +62,20 @@ $r -> execute();
 
 foreach ($r -> fetchAll() as $line) {
     $moviePage -> appendContent(<<<HTML
-
-            <div class="list__people">
-                <a href="people.php?peopleId={$line['peopleId']}">
-                <div class="list__people__image">
-                    <img src="image.php?imageId={$line['avatarId']}" alt="Image de l'acteur(ice) : {$line['name']}">
+    
+                <div class="list__people">
+                    <a href="people.php?peopleId={$line['peopleId']}">
+                    <div class="list__people__image">
+                        <img src="image.php?imageId={$line['avatarId']}" alt="Image de l'acteur(ice) : {$line['name']}">
+                    </div>
+                    <div class="list__people_role">
+                        Rôle : {$line['role']}
+                    </div>
+                    <div class="list__people_name">
+                        Nom : {$line['name']}
+                    </div>
+                    </a>
                 </div>
-                <div class="list__people_role">
-                    Rôle : {$line['role']}
-                </div>
-                <div class="list__people_name">
-                    Nom : {$line['name']}
-                </div>
-                </a>
-            </div>
 HTML);
 }
 
