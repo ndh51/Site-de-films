@@ -85,7 +85,7 @@ $moviePage -> appendContent(<<<HTML
         </ul>
     </main>
     <footer class="footer">
-        <h2>Dernière modification : </h2>
+        <h2>{$moviePage->getLastModification()}</h2>
     </footer>
 HTML);
 
