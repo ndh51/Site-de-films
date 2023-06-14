@@ -16,7 +16,9 @@ $wp->appendCssUrl('css/index.css');
 
 $wp->appendContent(
     <<<HTML
-    <header> <h1>Films</h1> </header>
+    <header> 
+        <h1>Films</h1> 
+    </header>
         <div class="buttons">
             <a href="menus/addMovie.php" class="menu_addMovie">
                 <svg class="svg-icon" viewBox="0 0 20 20" height="60">
@@ -34,8 +36,9 @@ $wp->appendContent(
         
         <div class="list">
         <div class="filter">
+            <a href="index.php"><p>Afficher tous les films</p></a>
             <h1> Filtres <h1>
-            <form name="filters" method="POST" action="index.php">
+            <form name="filters" method="GET" action="index.php">
             <label> 
                    <select name="genreid">
                    <button type="submit">Valider</button> 
@@ -60,10 +63,10 @@ $wp->appendContent('</select> <button type="submit">Valider</button> </label> </
 ##selection de l'affichage
 
 
-if (!empty($_POST['genreid'])) {
+if (!empty($_GET['genreid'])) {
 
     $query=MyPdo::getInstance()->prepare('select * from cutron01_movie.movie where id in (select movieId from movie_genre where genreId=?)');
-    $query->bindValue(1, $_POST['genreid']);
+    $query->bindValue(1, $_GET['genreid']);
     $query->execute();
     foreach ($query->fetchAll(MyPdo::FETCH_ASSOC) as $line) {
         $wp->appendContent(
@@ -88,7 +91,7 @@ if (!empty($_POST['genreid'])) {
     }
 }
 
-if (empty($_POST['genreid'])) {
+if (empty($_GET['genreid'])) {
     foreach ($ans as $line) {
 
         $wp->appendContent(
