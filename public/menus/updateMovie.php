@@ -26,10 +26,14 @@ try {
     exit;
 }
 
+
+
 $movie = Movie::findById((int)$movieId);
 
 $updateMoviePage = new WebPage("Modification de {$movie->getTitle()}");
 
 $updateMoviePage -> appendContent("<h1>test</h1>");
+
+$updateMoviePage->appendCssUrl('css/update.css');
 
 echo $updateMoviePage->toHTML();
