@@ -6,6 +6,8 @@ use Html\WebPage;
 
 $addPeoplePage = new WebPage("Ajouter un(e) acteur(ice)");
 
+$addPeoplePage->appendCssUrl('/css/add.css');
+
 $addPeoplePage -> appendContent(<<<HTML
     <header class="header">
         <h1>Ajouter un(e) acteur/ice</h1>

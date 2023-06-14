@@ -26,9 +26,13 @@ try {
     exit;
 }
 
+
+
 $movie = Movie::findById((int)$movieId);
 
 $updateMoviePage = new WebPage("Modifier - {$movie->getTitle()}");
+
+$updateMoviePage->appendCssUrl('/css/update.css');
 
 $updateMoviePage -> appendContent(<<<HTML
     <header class="header">
@@ -72,5 +76,7 @@ $updateMoviePage -> appendContent(<<<HTML
         </a>
     </footer>
 HTML);
+
+$updateMoviePage->appendCssUrl('css/update.css');
 
 echo $updateMoviePage->toHTML();

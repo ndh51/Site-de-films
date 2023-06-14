@@ -6,7 +6,6 @@ use Database\MyPdo;
 use Entity\Exception\ParameterException;
 use Html\WebPage;
 
-
 $confirmUpdateMoviePage = new WebPage("Page de confirmation : Film");
 
 /** Fait une vérification du paramètre donné
@@ -77,4 +76,3 @@ $confirmUpdateMoviePage -> appendContent(<<<HTML
 HTML);
 
 echo $confirmUpdateMoviePage ->toHTML();
-
