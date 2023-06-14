@@ -7,8 +7,6 @@ use Entity\Exception\ParameterException;
 use Entity\Movie;
 use Html\WebPage;
 
-$updateMoviePage = new WebPage();
-/*
 try {
     if (!isset($_GET['movieId']) || !ctype_digit($_GET['movieId']) || $_GET['movieId'] < 0) {
         throw new ParameterException();
@@ -27,12 +25,11 @@ try {
     http_response_code(500);
     exit;
 }
- */
-
-$movieId = preg_replace('@<(.+)[^>]*>.*?@is', '', $_GET['movieId']);
 
 $movie = Movie::findById((int)$movieId);
 
-$updateMoviePage -> setTitle("Modification de {$movie->getTitle()}");
+$updateMoviePage = new WebPage("Modification de {$movie->getTitle()}");
 
 $updateMoviePage -> appendContent("<h1>test</h1>");
+
+echo $updateMoviePage->toHTML();
