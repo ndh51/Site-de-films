@@ -12,7 +12,7 @@ $ans=MovieCollection::findAllMovies();
 
 $wp->setTitle('Films');
 
-$wp->appendCssUrl('/index.css');
+$wp->appendCssUrl('css/index.css');
 
 $wp->appendContent(<<<HTML
     <header> <h1>Films</h1> </header>

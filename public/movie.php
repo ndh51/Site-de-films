@@ -31,7 +31,7 @@ try {
 
 $movie = Movie::findById((int)$movieId);
 
-$moviePage->appendCssUrl('/movie.css');
+$moviePage->appendCssUrl('css/movie.css');
 
 $moviePage -> setTitle("{$movie->getTitle()}");
 
