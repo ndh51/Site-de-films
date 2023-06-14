@@ -33,12 +33,61 @@ $wp->appendContent(
         </div>
         
         <div class="list">
-
+        <div class="filter">
+            <h1> Filtres <h1>
+            <form name="filter" method="POST" action="index.php">
+            <label> 
+                   <select name="jour">
+                   <button type="submit">Valider</button> 
+                   
 HTML
 );
 
-$query=MyPdo::getInstance()->prepare('select jpeg from cutron01_movie.image where id=?');
 
+$query=MyPdo::getInstance()->query('select * from genre');
+
+
+foreach ($query->fetchAll(MyPdo::FETCH_ASSOC) as $line) {
+    $wp->appendContent(
+        <<<HTML
+                <option name='genreid' value="{$line['id']}"> {$line['name']}</option>
+    HTML
+    );
+}
+
+$wp->appendContent('</select> <button type="submit">Valider</button> </label> </form> </div>');
+
+
+if (!empty($_POST['genreid'] && gettype($_POST['jour'])!="int")){
+
+    $query=MyPdo::getInstance()->prepare('select * from cutron01_movie.movie where id in (select movieId from movie_genre where genreId=?)');
+
+    $query->bindValue(1,$_POST['genreid']);
+    $ans=$query->execute();
+    foreach ($ans as $line){
+        $wp->appendContent(
+            <<<HTML
+                <div class="movie">
+                    <a href="movie.php?movieId={$line->getId()}">
+                        <div class="movie_cover">
+                            <a href="movie.php?movieId={$line->getId()}"> 
+                                <img src='poster.php?posterId={$line->getPosterId()}' alt="{$line->getTitle()}">
+                            </a>
+                        </div>
+                        <div class="movie_title">
+                            <a href="movie.php?movieId={$line->getId()}">
+                                <p> {$line->getTitle()} </p>
+                            </a>
+                        </div>
+                    </a>
+                </div>
+
+    HTML
+        );
+    }
+}
+
+if (empty($_POST['genreid'])){
 foreach ($ans as $line) {
 
     $wp->appendContent(
@@ -61,7 +110,7 @@ foreach ($ans as $line) {
     HTML
     );
 }
-
+}
 $wp->appendContent('        </div> ');
 
 $wp->appendContent("
