@@ -14,7 +14,7 @@ body{
     height: 100%;
     flex-direction: column;
     margin: 0 5% 0 5%;
-    border: solid;
+
 }
 
 form{
@@ -22,13 +22,12 @@ form{
     flex-direction: column;
     flex-grow: 5;
     border: solid;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
 }
 
 
 footer{
     flex-grow: 1;
-    border: solid
-
+    border: solid;
 }
