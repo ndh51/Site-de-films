@@ -50,7 +50,7 @@ HTML
 foreach (MyPdo::getInstance()->query('select * from genre')->fetchAll(MyPdo::FETCH_ASSOC) as $line) {
     $wp->appendContent(
         <<<HTML
-                <option name='genreid' value="{$line['id']}" {$line['name']}</option>
+                <option name='genreid' value="{$line['id']}"> {$line['name']}</option>
     HTML
     );
 }
