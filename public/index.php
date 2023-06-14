@@ -33,16 +33,66 @@ $wp->appendContent(
         </div>
         
         <div class="list">
-
+        <div class="filter">
+            <h1> Filtres <h1>
+            <form name="filters" method="POST" action="index.php">
+            <label> 
+                   <select name="genreid">
+                   <button type="submit">Valider</button> 
+                   
 HTML
 );
 
-$query=MyPdo::getInstance()->prepare('select jpeg from cutron01_movie.image where id=?');
+## Selection des filtres
 
-foreach ($ans as $line) {
-
+foreach (MyPdo::getInstance()->query('select * from genre')->fetchAll(MyPdo::FETCH_ASSOC) as $line) {
     $wp->appendContent(
         <<<HTML
+                <option name='genreid' value="{$line['id']}" type="number"> {$line['name']}</option>
+    HTML
+    );
+}
+
+$wp->appendContent('</select> <button type="submit">Valider</button> </label> </form> </div>');
+
+
+
+##selection de l'affichage
+
+
+if (!empty($_POST['genreid'])) {
+
+    $query=MyPdo::getInstance()->prepare('select * from cutron01_movie.movie where id in (select movieId from movie_genre where genreId=?)');
+    $query->bindValue(1, $_POST['genreid']);
+    $query->execute();
+    foreach ($query->fetchAll(MyPdo::FETCH_ASSOC) as $line) {
+        $wp->appendContent(
+            <<<HTML
+                <div class="movie">
+                    <a href="movie.php?movieId={$line['id']}}">
+                        <div class="movie_cover">
+                            <a href="movie.php?movieId={$line['id']}"> 
+                                <img src='poster.php?posterId={$line['posterId']}' alt="{$line['title']}">
+                            </a>
+                        </div>
+                        <div class="movie_title">
+                            <a href="movie.php?movieId={$line['id']}">
+                                <p> {$line['title']} </p>
+                            </a>
+                        </div>
+                    </a>
+                </div>
+
+    HTML
+        );
+    }
+}
+
+if (empty($_POST['genreid'])) {
+    foreach ($ans as $line) {
+
+        $wp->appendContent(
+            <<<HTML
                 <div class="movie">
                     <a href="movie.php?movieId={$line->getId()}">
                         <div class="movie_cover">
@@ -59,9 +109,9 @@ foreach ($ans as $line) {
                 </div>
 
     HTML
-    );
+        );
+    }
 }
-
 $wp->appendContent('        </div> ');
 
 $wp->appendContent("
