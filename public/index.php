@@ -36,7 +36,6 @@ $wp->appendContent(
         
         <div class="list">
         <div class="filter">
-            <a href="index.php"><p>Afficher tous les films</p></a>
             <h1> Filtres <h1>
             <form name="filters" method="GET" action="index.php">
             <label> 
@@ -56,7 +55,7 @@ foreach (MyPdo::getInstance()->query('select * from genre')->fetchAll(MyPdo::FET
     );
 }
 
-$wp->appendContent('</select> <button type="submit">Valider</button> </label> </form> </div>');
+$wp->appendContent('</select> <button type="submit">Valider</button> </label> </form> <a href="/"><p>Réafficher tous les films</p></a> </div>');
 
 
 
