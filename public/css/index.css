@@ -16,10 +16,24 @@ header{
 
 }
 
+
+.buttons{
+    display: flex;
+    flex-direction: row;
+}
+
 .menu_addMovie{
     border: solid;
     display: flex;
     justify-content: center;
+    flex-grow: 1;
+}
+
+.menu_addPeople{
+    border: solid;
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
 }
 
 .list{
