@@ -33,6 +33,8 @@ if(isset($_POST['verif']) && $_POST['verif']==1){
     $q=MyPdo::getInstance()->prepare('DELETE FROM movie WHERE id=?');
     $q->bindValue(1,$movie->getId());
     $q->execute();
+    header('Location: /index.php');
+    exit();
 }
 
 
