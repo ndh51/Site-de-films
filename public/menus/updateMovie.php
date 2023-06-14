@@ -32,6 +32,8 @@ $movie = Movie::findById((int)$movieId);
 
 $updateMoviePage = new WebPage("Modifier - {$movie->getTitle()}");
 
+$updateMoviePage->appendCssUrl('/css/update.css');
+
 $updateMoviePage -> appendContent(<<<HTML
     <header class="header">
         <h1>Modifier - {$movie->getTitle()}</h1>
