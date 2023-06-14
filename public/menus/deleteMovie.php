@@ -9,6 +9,7 @@ use Entity\Movie;
 $movie= Movie::findById((int)$_GET['movieId']);
 
 $wp=new WebPage('Etes vous sur de vouloir supprimer'. $movie->getTitle() .'? ');
+$wp->appendCssUrl('/css/delete.css');
 
 $wp->appendContent(<<<HTML
     <h1> Etes vous sur de vouloir supprimer {$movie->getTitle()} ?()</h1>
