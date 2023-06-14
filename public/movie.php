@@ -39,7 +39,14 @@ $moviePage -> appendContent(<<<HTML
     <header class="header">
             <h1>Films - {$movie->getTitle()}</h1>
         </header>
+        <form action="index.php" method="post" class="menu_accueil">
+            <button>Retour à l'accueil</button>
+        </form>
         <main>
+            <form method="post" class="menu_updtDelMovie">
+                <button formaction="updateMovie.php">Modifier</button>
+                <button formaction="deleteMovie.php">Supprimer</button>
+            </form>
             <div class="movie">
                 <div class="movie__poster">
                     <img src='poster.php?posterId={$movie->getPosterId()}' alt="Poster du film : {$movie->getTitle()}">
