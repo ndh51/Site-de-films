@@ -31,13 +31,13 @@ HTML);
 
 
 
-if(isset($_POST['verif']) && $_POST['verif']==0){
+if(isset($_POST['verif']) && $_POST['verif']==0) {
     header("Location: ../people.php?peopleId={$_GET['peopleId']}");
     exit();
 }
-if(isset($_POST['verif']) && $_POST['verif']==1){
+if(isset($_POST['verif']) && $_POST['verif']==1) {
     $q=MyPdo::getInstance()->prepare('DELETE FROM people WHERE id=?');
-    $q->bindValue(1,$people->getId());
+    $q->bindValue(1, $people->getId());
     $q->execute();
     header('Location: ../');
     exit();

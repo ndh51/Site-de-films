@@ -29,13 +29,13 @@ HTML);
 
 
 
-if(isset($_POST['verif']) && $_POST['verif']==0){
+if(isset($_POST['verif']) && $_POST['verif']==0) {
     header("Location: ../movie.php?movieId={$_GET['movieId']}");
     exit();
 }
-if(isset($_POST['verif']) && $_POST['verif']==1){
+if(isset($_POST['verif']) && $_POST['verif']==1) {
     $q=MyPdo::getInstance()->prepare('DELETE FROM movie WHERE id=?');
-    $q->bindValue(1,$movie->getId());
+    $q->bindValue(1, $movie->getId());
     $q->execute();
     header('Location: ../');
     exit();
