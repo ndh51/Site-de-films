@@ -47,3 +47,17 @@ try {
     http_response_code(400);
     exit;
 }
+
+$r = MyPdo::getInstance() -> prepare(<<<SQL
+    UPDATE movie
+    SET title=?, releaseDate=?, originalTitle=?, tagline=?, overview=?
+    WHERE id = ?
+SQL);
+$r -> bindValue(1, $title);
+$r -> bindValue(2, $releaseDate);
+$r -> bindValue(3, $originalTitle);
+$r -> bindValue(4, $tagline);
+$r -> bindValue(5, $overview);
+$r -> bindValue(6, $id);
+$r -> execute();
+
