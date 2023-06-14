@@ -16,7 +16,6 @@ header{
 
 }
 
-
 .buttons{
     display: flex;
     flex-direction: row;
@@ -36,6 +35,8 @@ header{
     flex-grow: 1;
 }
 
+
+
 .list{
     border: solid;
     display: flex;
@@ -47,12 +48,18 @@ header{
     flex-grow: 4;
 }
 
+.filter{
+    flex-grow: 1;
+    text-align: center;
+}
+
 .movie{
     margin-top: 40px;
     display: flex;
     flex-direction: column;
     border: solid;
     max-width: 15rem;
+    flex-grow: 1;
 }
 
 .movie_title{
