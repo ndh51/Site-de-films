@@ -60,12 +60,12 @@ $wp->appendContent('</select> <button type="submit">Valider</button> </label> </
 ##selection de l'affichage
 
 
-if (!empty($_POST['genreid'])){
+if (!empty($_POST['genreid'])) {
 
     $query=MyPdo::getInstance()->prepare('select * from cutron01_movie.movie where id in (select movieId from movie_genre where genreId=?)');
-    $query->bindValue(1,$_POST['genreid']);
+    $query->bindValue(1, $_POST['genreid']);
     $query->execute();
-    foreach ($query->fetchAll(MyPdo::FETCH_ASSOC) as $line){
+    foreach ($query->fetchAll(MyPdo::FETCH_ASSOC) as $line) {
         $wp->appendContent(
             <<<HTML
                 <div class="movie">
@@ -88,11 +88,11 @@ if (!empty($_POST['genreid'])){
     }
 }
 
-if (empty($_POST['genreid'])){
-foreach ($ans as $line) {
+if (empty($_POST['genreid'])) {
+    foreach ($ans as $line) {
 
-    $wp->appendContent(
-        <<<HTML
+        $wp->appendContent(
+            <<<HTML
                 <div class="movie">
                     <a href="movie.php?movieId={$line->getId()}">
                         <div class="movie_cover">
@@ -109,8 +109,8 @@ foreach ($ans as $line) {
                 </div>
 
     HTML
-    );
-}
+        );
+    }
 }
 $wp->appendContent('        </div> ');
 
