@@ -6,6 +6,8 @@ use Html\WebPage;
 
 $addMoviePage = new WebPage("Ajouter un film");
 
+$addMoviePage->appendCssUrl('/css/add.css');
+
 $addMoviePage -> appendContent(<<<HTML
     <header class="header">
         <h1>Ajouter un film</h1>
