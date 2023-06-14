@@ -38,6 +38,13 @@ $originalTitle = verify_exception("originalTitle");
 $tagline = verify_exception("tagline");
 $overview = verify_exception("overview");
 
+$r = MyPdo::getInstance() -> prepare(<<<SQL
+    SELECT id
+    FROM movie
+SQL);
+$r -> execute();
+$ids = $r -> fetchAll();
+
 try {
     if ($_GET['id'] == '') {
         throw new ParameterException();
@@ -52,3 +59,17 @@ try {
     http_response_code(400);
     exit;
 }
+
+$r = MyPdo::getInstance() -> prepare(<<<SQL
+    INSERT INTO movie (id,title,releaseDate, originalTitle, tagline, overview)
+    VALUES (?,?,?,?,?,?)
+SQL);
+$r -> bindValue(1, $id);
+$r -> bindValue(2, $title);
+$r -> bindValue(3, $releaseDate);
+$r -> bindValue(4, $originalTitle);
+$r -> bindValue(5, $tagline);
+$r -> bindValue(6, $overview);
+$r -> execute();
+
+echo $confirmEditMoviePage ->toHTML();
