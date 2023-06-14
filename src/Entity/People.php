@@ -14,7 +14,7 @@ class People
     /* --------------------------------------------------- */
 
     private int $id;
-    private int $avatarId;
+    private ?int $avatarId = null;
     private ?string $birthday = null;
     private ?string $deathday = null;
     private string $name;
@@ -45,17 +45,17 @@ class People
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getAvatarId(): int
+    public function getAvatarId(): ?int
     {
         return $this->avatarId;
     }
 
     /**
-     * @param int $avatarId
+     * @param int|null $avatarId
      */
-    public function setAvatarId(int $avatarId): void
+    public function setAvatarId(?int $avatarId): void
     {
         $this->avatarId = $avatarId;
     }
