@@ -14,12 +14,12 @@ class Movie
     /* --------------------------------------------------- */
 
     private int $id;
-    private int $posterId;
+    private ?int $posterId = null;
     private string $originalLanguage;
     private string $originalTitle;
     private string $overview;
     private string $releaseDate;
-    private int $runtime;
+    private ?int $runtime = null;
     private string $tagline;
     private string $title;
 
@@ -46,17 +46,17 @@ class Movie
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getPosterId(): int
+    public function getPosterId(): ?int
     {
         return $this->posterId;
     }
 
     /**
-     * @param int $posterId
+     * @param int|null $posterId
      */
-    public function setPosterId(int $posterId): void
+    public function setPosterId(?int $posterId): void
     {
         $this->posterId = $posterId;
     }
@@ -126,17 +126,17 @@ class Movie
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getRuntime(): int
+    public function getRuntime(): ?int
     {
         return $this->runtime;
     }
 
     /**
-     * @param int $runtime
+     * @param int|null $runtime
      */
-    public function setRuntime(int $runtime): void
+    public function setRuntime(?int $runtime): void
     {
         $this->runtime = $runtime;
     }
