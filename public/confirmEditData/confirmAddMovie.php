@@ -17,10 +17,10 @@ $confirmEditMoviePage = new WebPage("Page de confirmation : Film");
 function verify_exception(string $param): string
 {
     try {
-        if (!isset($_GET[$param])) {
+        if (!isset($_POST[$param])) {
             throw new ParameterException();
         }
-        $paramSecured = preg_replace('@<(.+)[^>]*>.*?@is', '', $_GET[$param]);
+        $paramSecured = preg_replace('@<(.+)[^>]*>.*?@is', '', $_POST[$param]);
     } catch (ParameterException) {
         http_response_code(400);
         exit;
