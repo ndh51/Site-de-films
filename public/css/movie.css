@@ -16,10 +16,9 @@ header{
     display: flex;
     flex-direction: row;
 
-
 }
 
-.boutons>a{
+.buttons>a{
     display: flex;
     justify-content: center;
 }
@@ -32,10 +31,11 @@ h1{
     flex-grow: 15;
 }
 
-.boutons{
+.buttons{
     display: flex;
     flex-direction: row;
     justify-content: center;
+    margin-top: 10px;
 
 }
 
