@@ -21,7 +21,7 @@ class Movie
     private string $releaseDate;
     private ?int $runtime = null;
     private string $tagline;
-    private string $title;
+    private string $title = "Titre inconnu";
 
 
 

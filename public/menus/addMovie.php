@@ -10,7 +10,7 @@ $addMoviePage -> appendContent(<<<HTML
     <header class="header">
         <h1>Ajouter un film</h1>
     </header>
-    <form method="get" action="../confirmEditData/confirmEditMovie.php">
+    <form method="post" action="../confirmEditData/confirmAddMovie.php">
         <div class="movie__poster">
             <img src='../poster.php?posterId=' alt="Poster de film inconnu">
         </div>
