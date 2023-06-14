@@ -16,7 +16,7 @@ $addMoviePage -> appendContent(<<<HTML
         </div>
         <label class="movie__id__input">
             Id du film : 
-            <input name="id" type="text">
+            <input name="id" type="text" required>
         </label>
         <label class="movie__title__input">
             Titre : 
