@@ -35,22 +35,20 @@ $wp->appendContent(
         <div class="list">
         <div class="filter">
             <h1> Filtres <h1>
-            <form name="filter" method="POST" action="index.php">
+            <form name="filters" method="POST" action="index.php">
             <label> 
-                   <select name="jour">
+                   <select name="genreid">
                    <button type="submit">Valider</button> 
                    
 HTML
 );
 
+## Selection des filtres
 
-$query=MyPdo::getInstance()->query('select * from genre');
-
-
-foreach ($query->fetchAll(MyPdo::FETCH_ASSOC) as $line) {
+foreach (MyPdo::getInstance()->query('select * from genre')->fetchAll(MyPdo::FETCH_ASSOC) as $line) {
     $wp->appendContent(
         <<<HTML
-                <option name='genreid' value="{$line['id']}"> {$line['name']}</option>
+                <option name='genreid' value="{$line['id']}" type="number"> {$line['name']}</option>
     HTML
     );
 }
@@ -58,25 +56,28 @@ foreach ($query->fetchAll(MyPdo::FETCH_ASSOC) as $line) {
 $wp->appendContent('</select> <button type="submit">Valider</button> </label> </form> </div>');
 
 
-if (!empty($_POST['genreid'] && gettype($_POST['jour'])!="int")){
+
+##selection de l'affichage
+
+
+if (!empty($_POST['genreid'])){
 
     $query=MyPdo::getInstance()->prepare('select * from cutron01_movie.movie where id in (select movieId from movie_genre where genreId=?)');
-
     $query->bindValue(1,$_POST['genreid']);
-    $ans=$query->execute();
-    foreach ($ans as $line){
+    $query->execute();
+    foreach ($query->fetchAll(MyPdo::FETCH_ASSOC) as $line){
         $wp->appendContent(
             <<<HTML
                 <div class="movie">
-                    <a href="movie.php?movieId={$line->getId()}">
+                    <a href="movie.php?movieId={$line['id']}}">
                         <div class="movie_cover">
-                            <a href="movie.php?movieId={$line->getId()}"> 
-                                <img src='poster.php?posterId={$line->getPosterId()}' alt="{$line->getTitle()}">
+                            <a href="movie.php?movieId={$line['id']}"> 
+                                <img src='poster.php?posterId={$line['posterId']}' alt="{$line['title']}">
                             </a>
                         </div>
                         <div class="movie_title">
-                            <a href="movie.php?movieId={$line->getId()}">
-                                <p> {$line->getTitle()} </p>
+                            <a href="movie.php?movieId={$line['id']}">
+                                <p> {$line['title']} </p>
                             </a>
                         </div>
                     </a>
