@@ -10,13 +10,17 @@ $addPeoplePage -> appendContent(<<<HTML
     <header class="header">
         <h1>Ajouter un(e) acteur/ice</h1>
     </header>
-    <form method="post" action="requestAddPeople.php">
+    <form method="post" action="../confirmEditData/confirmAddPeople.php">
         <div class="people__image">
             <img src='../vignette.php?vignetteId=' alt="Image d'acteur/ice inconnu(e)">
         </div>
+        <label class="people__id__input">
+            Id de l'acteur/ice : 
+            <input name="id" type="text" required>
+        </label>
         <label class="people__name__input">
             Nom : 
-            <input name="name" type="text">
+            <input name="name" type="text" required>
         </label>
         <label class="people__placeofbirth__input">
             Lieu de naissance : 

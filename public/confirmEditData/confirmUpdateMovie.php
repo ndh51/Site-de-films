@@ -7,7 +7,7 @@ use Entity\Exception\ParameterException;
 use Html\WebPage;
 
 
-$confirmEditMoviePage = new WebPage("Page de confirmation : Film");
+$confirmUpdateMoviePage = new WebPage("Page de confirmation : Film");
 
 /** Fait une vérification du paramètre donné
  *
@@ -50,7 +50,7 @@ try {
 
 $r = MyPdo::getInstance() -> prepare(<<<SQL
     UPDATE movie
-    SET title=?, releaseDate=?, originalTitle=?, tagline=?, overview=?
+    SET title=?, releaseDate=STR_TO_DATE(?,'YYYY-MM-DD'), originalTitle=?, tagline=?, overview=?
     WHERE id = ?
 SQL);
 $r -> bindValue(1, $title);
@@ -61,21 +61,20 @@ $r -> bindValue(5, $overview);
 $r -> bindValue(6, $id);
 $r -> execute();
 
-$confirmEditMoviePage -> appendContent(<<<HTML
+$confirmUpdateMoviePage -> appendContent(<<<HTML
     <header class="header">
         <h1>Modifier - {$title}</h1>
     </header>
         <h2>Réussite ! </h2>
         <p>Le film a bien été modifié</p>
-        <a class="menu_accueil_button" href="../movie.php?movieId={$id}">
+        <a class="menu_return_button" href="../movie.php?movieId={$id}">
             <svg class="svg-icon" viewBox="0 0 20 20" height="60">
-                <path d="M18.121,9.88l-7.832-7.836c-0.155-0.158-0.428-0.155-0.584,0L1.842,9.913c-0.262,0.263-0.073,0.705,0.292,0.705h2.069v7.042c0,0.227,0.187,0.414,0.414,0.414h3.725c0.228,0,0.414-0.188,0.414-0.414v-3.313h2.483v3.313c0,0.227,0.187,0.414,0.413,0.414h3.726c0.229,0,0.414-0.188,0.414-0.414v-7.042h2.068h0.004C18.331,10.617,18.389,10.146,18.121,9.88 M14.963,17.245h-2.896v-3.313c0-0.229-0.186-0.415-0.414-0.415H8.342c-0.228,0-0.414,0.187-0.414,0.415v3.313H5.032v-6.628h9.931V17.245z M3.133,9.79l6.864-6.868l6.867,6.868H3.133z"></path>
-            </svg>
+                <path d="M18.175,4.142H1.951C1.703,4.142,1.5,4.344,1.5,4.592v10.816c0,0.247,0.203,0.45,0.451,0.45h16.224c0.247,0,0.45-0.203,0.45-0.45V4.592C18.625,4.344,18.422,4.142,18.175,4.142 M4.655,14.957H2.401v-1.803h2.253V14.957zM4.655,12.254H2.401v-1.803h2.253V12.254z M4.655,9.549H2.401V7.747h2.253V9.549z M4.655,6.846H2.401V5.043h2.253V6.846zM14.569,14.957H5.556V5.043h9.013V14.957z M17.724,14.957h-2.253v-1.803h2.253V14.957z M17.724,12.254h-2.253v-1.803h2.253V12.254zM17.724,9.549h-2.253V7.747h2.253V9.549z M17.724,6.846h-2.253V5.043h2.253V6.846z"></path>            </svg>
             <p>Retour au film</p>
         </a>
     <footer class="footer">
     </footer>
 HTML);
 
-echo $confirmEditMoviePage ->toHTML();
+echo $confirmUpdateMoviePage ->toHTML();
 
