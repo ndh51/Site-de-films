@@ -30,6 +30,8 @@ $people = People::findById((int)$peopleId);
 
 $updatePeoplePage = new WebPage("Modifier - {$people->getName()}");
 
+$updatePeoplePage->appendCssUrl('/css/update.css');
+
 $updatePeoplePage -> appendContent(<<<HTML
     <header class="header">
         <h1>Modifier - {$people->getName()}</h1>
