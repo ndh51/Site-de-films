@@ -13,7 +13,7 @@ $wp=new WebPage('Etes vous sur de vouloir supprimer'. $movie->getTitle() .'? ');
 $wp->appendCssUrl('/css/delete.css');
 
 $wp->appendContent(<<<HTML
-    <h1> Etes vous sur de vouloir supprimer {$movie->getTitle()} ?()</h1>
+    <h1> Etes vous sur de vouloir supprimer "{$movie->getTitle()}" ?</h1>
     <form name="frm" method="post" action="deleteMovie.php?movieId={$_GET['movieId']}">
     <label> 
         <input name="verif" value="0" type="radio"  checked>Non</input>

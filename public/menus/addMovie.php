@@ -12,10 +12,14 @@ $addMoviePage -> appendContent(<<<HTML
     <header class="header">
         <h1>Ajouter un film</h1>
     </header>
-    <form method="post" action="requestAddMovie.php">
+    <form method="post" action="../confirmEditData/confirmAddMovie.php">
         <div class="movie__poster">
             <img src='../poster.php?posterId=' alt="Poster de film inconnu">
         </div>
+        <label class="movie__id__input">
+            Id du film : 
+            <input name="id" type="text" required>
+        </label>
         <label class="movie__title__input">
             Titre : 
             <input name="title" type="text">
