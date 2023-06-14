@@ -16,6 +16,12 @@ header{
 
 }
 
+.menu_addMovie{
+    border: solid;
+    display: flex;
+    justify-content: center;
+}
+
 .list{
     border: solid;
     display: flex;
