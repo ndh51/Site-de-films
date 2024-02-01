@@ -1,14 +1,5 @@
 # sae2-01
 
-
-
-## Auteurs
-
-HALES Nadhir : hale0010
-MORLET Steven : morl0027
-
-
-
 <br>
 
 ## Description du projet
